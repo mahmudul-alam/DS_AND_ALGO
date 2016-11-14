@@ -1,35 +1,39 @@
 package sorting.mergesort;
 
 public class TestMergeSort {
+	@SuppressWarnings("unused")
 	public static void main(String s[]) {
-		int[] a = {38, 27, 43, 3, 9, 82, 10 };
+		int[] a = { 3, 9, 2, 5, 7, 10, 19, 15, 1, 10 };
 		System.out.println("Before Merge Sort: ");
 		for (int i = 0; i < a.length; i++)
 			System.out.println(a[i]);
-		mergeSort(a, 0, a.length - 1);
+		int[] countInversion = {0};
+		mergeSort(a, 0, a.length - 1, countInversion);
 		System.out.println("After Merge Sort: ");
 		for (int i = 0; i < a.length; i++)
 			System.out.println(a[i]);
-		
-		if('C'<'D'){
+		System.out.println("Number of Inversion: " + countInversion[0]);
+		if ('C' < 'D') {
 			System.out.println("smaller");
-		}else{
+		} else {
 			System.out.println("bigger");
 		}
-		
-		
+
 	}
 
-	private static void mergeSort(int[] a, int l, int r) {
+	private static void mergeSort(int[] a, int l, int r, int[] countInversion) {
+
+		//Integer countInversion = 0;
 		if (l < r) {
-			int m = (l+r)/2;
-			mergeSort(a, l, m);
-			mergeSort(a, m+1, r);
-			merge(a, l, m , r);
+			int m = (l + r) / 2;
+			mergeSort(a, l, m, countInversion);
+			mergeSort(a, m + 1, r, countInversion);
+			merge(a, l, m, r, countInversion);
 		}
+		//return countInversion;
 	}
 
-	private static void merge(int[] a, int l, int m, int r) {
+	private static void merge(int[] a, int l, int m, int r, int[] countInversion) {
 
 		int n1 = m - l + 1;
 		int n2 = r - m;
@@ -58,6 +62,8 @@ public class TestMergeSort {
 				a[k] = L[i];
 				i++;
 			} else {
+				// count the number of inversion
+				countInversion[0] = countInversion[0] + (L.length - i);
 				a[k] = R[j];
 				j++;
 			}
@@ -77,6 +83,8 @@ public class TestMergeSort {
 			j++;
 			k++;
 		}
+
+		//return countInversion;
 
 	}
 

@@ -18,6 +18,7 @@ public class ReverseString1 {
 		String newString = str.replaceAll("[^a-zA-Z]", "");
 		//System.out.println(reverseRecursively(str));
 		String reverseString = reverseRecursively(newString);
+		System.out.println(reverseString);
 		
 		if(newString.equalsIgnoreCase(reverseString)){
 			System.out.println("Palindrome");

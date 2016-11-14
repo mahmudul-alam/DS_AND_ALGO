@@ -5,6 +5,8 @@ public class MoveArrayContent {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] ar = { 1, 2, 3, 4, 5, 6, 7 };
+		
+		// move content of array 
 		moveArrayContent(ar, 4);
 	}
 

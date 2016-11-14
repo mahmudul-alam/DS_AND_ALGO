@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
@@ -13,6 +14,7 @@ public class Graph {
 	private Vertex[] listOfVertex;
 
 	private Stack<Integer> stack;
+	private Queue<Integer> queue;
 	private boolean visited[];
 	public String[] pathTraversed;
 	private int pathTraversedIndex = 0;
@@ -20,6 +22,14 @@ public class Graph {
 	public Graph() {
 		stack = new Stack<Integer>();
 	}
+	
+	
+
+	public Vertex[] getListOfVertex() {
+		return listOfVertex;
+	}
+
+
 
 	public void initializeGraphDS(String inputFile) {
 		BufferedReader br;
@@ -65,23 +75,6 @@ public class Graph {
 		}
 	}
 
-	/*
-	 * private String findPath(int source, int destination) {
-	 * 
-	 * if (source == destination) { return listOfVertex[source].name + " - " +
-	 * listOfVertex[destination].name; }
-	 * 
-	 * for (int i = 0; i < listOfVertex.length; i++) { if (visited[i] != true) {
-	 * visited[i] = true; Vertex vertex = listOfVertex[i];
-	 * stack.push(vertex.name);
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * return ""; }
-	 */
-
 	public void findPathDFS(int index) {
 
 		Vertex vertex = listOfVertex[index];
@@ -102,9 +95,31 @@ public class Graph {
 			if (!stack.isEmpty()) {
 				Integer item = stack.pop();
 				findPathDFS(item.intValue());
-				//System.out.println(listOfVertex[item.intValue()].name);
+				// System.out.println(listOfVertex[item.intValue()].name);
 			}
 		}
+
+	}
+
+	public void findPathBFS(Queue<Integer> queue) {
+
+		int index = queue.poll();
+
+		Vertex startVertx = listOfVertex[index];
+		if (!visited[index]) {
+			visited[index] = true;
+			pathTraversed[pathTraversedIndex++] = startVertx.name;
+		}
+
+		if (startVertx.listOfNeighobrs != null) {
+			for (int neighbor : startVertx.listOfNeighobrs) {
+				if (!visited[neighbor] && !queue.contains(neighbor)) {
+					queue.add(neighbor);
+				}
+			}
+		}
+		if (!queue.isEmpty())
+			findPathBFS(queue);
 
 	}
 

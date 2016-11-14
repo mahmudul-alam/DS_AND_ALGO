@@ -10,5 +10,9 @@ public class LinkedListTest {
 		list.addNode(new Node("Fourth Node"));
 		
 		list.printNodeText();
+		
+		list.reverseLinkedList();
+		
+		list.printNodeText();
 	}
 }

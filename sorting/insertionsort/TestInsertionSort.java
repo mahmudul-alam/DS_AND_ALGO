@@ -12,7 +12,7 @@ public class TestInsertionSort {
 			System.out.println(arr[i]);
 	}
 
-	private static int[] performInsertion(int arr[]) {
+	/*private static int[] performInsertion(int arr[]) {
 		for (int i = 1; i < arr.length; i++) {
 			int keyElement = arr[i];
 			int j = i - 1;
@@ -22,6 +22,26 @@ public class TestInsertionSort {
 			}
 			arr[j+1] = keyElement;
 		}
+		return arr;
+	}*/
+	
+	private static int[] performInsertion(int[] arr) {
+
+		for (int i = 1; i < arr.length; i++) {
+
+			int finalIndex = i - 1;
+			while (finalIndex >= 0) {
+				int elementToMove = arr[finalIndex + 1];
+				if (arr[finalIndex] > elementToMove) {
+					arr[finalIndex + 1] = arr[finalIndex];
+					arr[finalIndex] = elementToMove;
+					finalIndex--;
+				} else {
+					break;
+				}
+			}
+		}
+
 		return arr;
 	}
 }
